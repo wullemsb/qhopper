@@ -58,3 +58,5 @@ Choose the date range in the input and click the filter button. Using the clear 
 
 ![date-filter](docs/date-filter.gif)
 #
+
+## How to contribute
