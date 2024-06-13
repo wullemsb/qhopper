@@ -18,7 +18,7 @@ Prerequisites
 #
 1. Clone the repository:
 ```
-git clone https://ordina-ncore@dev.azure.com/ordina-ncore/Young%20Professionals/_git/QHopper
+git clone https://github.com/kubatemer/qhopper.git
 ```
 
 2. Install dependencies:
