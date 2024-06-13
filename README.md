@@ -15,6 +15,7 @@ QHopper is a desktop application built with Angular and Electron, designed to in
 ## Setup
 Prerequisites
 - RabbitMQ Server
+- NodeJS
 #
 1. Clone the repository:
 ```
