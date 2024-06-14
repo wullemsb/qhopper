@@ -1,7 +1,7 @@
 # QHopper
 
 ## Overview
-QHopper is a modern desktop client built with [Angular](https://angular.dev/) and [Electron](https://www.electronjs.org/) for the [RabbitMQ](https://www.rabbitmq.com/) message broker. It allows users to view vhosts, queues, queue message counts, and message details. You can also move messages and filter them by date.
+QHopper is a modern desktop client built with [Angular](https://angular.dev/) and [Electron](https://www.electronjs.org/) for the [RabbitMQ](https://www.rabbitmq.com/) message broker. The application allows users to connect to their RabbitMQ instance(s) and retrieve data on available queues and their messages.
 
 ## Features
 - Connect to RabbitMQ: Easily connect to your RabbitMQ server.
