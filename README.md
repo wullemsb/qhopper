@@ -59,4 +59,14 @@ Choose the date range in the input and click the filter button. Using the clear 
 ![date-filter](docs/date-filter.gif)
 #
 
+### Selecting Multiple Messages
+You can select multiple messages by holding the shift key:
+
+- If you check one checkbox, hold the shift key, and then select another checkbox, it will select everything in between.
+- If you haven't selected any checkboxes, hold the shift key and select a checkbox, it will select everything from the beginning to that checkbox.
+
+![shift-select](docs/shift-select.gif)
+#
+
+
 ## How to contribute
