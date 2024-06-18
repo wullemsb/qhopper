@@ -22,17 +22,11 @@
         [disabled]="this.selection.selected.length == 0">
         <mat-icon aria-hidden="false" aria-label="Add connection icon" fontIcon="delete" class="icons"></mat-icon>
       </button>
-      
+
       <button mat-raised-button class="black-white" (click)="fetchMessages()"
-        matTooltip="Fetch messages (2 seconds cooldown)" matTooltipClass="my-custom-tooltip"
-        [disabled]="this.isOnCooldown || !this.currentSelectedQueue">
-        <ng-container *ngIf="!this.isOnCooldown; else loading">
-          Fetch messages
-        </ng-container>
-        <ng-template #loading>
-          <mat-icon [class.fa-spin]="this.isOnCooldown" aria-hidden="false" aria-label="Progress icon"
-            fontIcon="sync"></mat-icon>
-        </ng-template>
+        matTooltip="Fetch messages" matTooltipClass="my-custom-tooltip"
+        [disabled]="!this.currentSelectedQueue">
+        Fetch messages
       </button>
     </div>
   </div>

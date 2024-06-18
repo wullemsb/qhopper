@@ -56,11 +56,6 @@ export class MainComponent {
 
   fetchMessages(queue: QueueModel): void {
 
-    // Unsubscribe from message retrieval subscription for a queue
-    if (this.refreshSubscription != undefined) {
-      this.refreshSubscription.unsubscribe();
-    }
-
     // Open dialog to show messages are being retrieved
     const getMessagesDialogRef = this.dialog.open(
       GetMessagesDialog,

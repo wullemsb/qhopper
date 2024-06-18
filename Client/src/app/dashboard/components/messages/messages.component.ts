@@ -30,7 +30,6 @@ export class MessagesComponent implements OnChanges {
   @Output() deleteMessagesEvent = new EventEmitter<any>();
   @Output() fetchMessage = new EventEmitter<QueueModel>();
   @ViewChild('dragPreviewTemplate', { static: true }) dragPreviewTemplate!: ElementRef;
-  isOnCooldown: boolean = false;
   dataSource = new TableVirtualScrollDataSource<MessageModel>(this.messages);
   dateControl = new FormControl();
   columnsToDisplay = ['checkbox', 'message_count', 'messageType', 'messageId', 'correlationId', 'conversationId', 'sentTime'];
@@ -122,11 +121,6 @@ export class MessagesComponent implements OnChanges {
 
   fetchMessages() {
     try {
-      if (this.isOnCooldown) {
-        return;
-      }
-
-      this.isOnCooldown = true;
 
       console.log('Fetching messages...');
 
@@ -134,7 +128,6 @@ export class MessagesComponent implements OnChanges {
 
       this.selection.clear();
       
-      this.isOnCooldown = false;
     } catch (error) {
       this.toastr.error('Something went wrong when fetching messages.')
     }
