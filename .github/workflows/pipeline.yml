@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - dev
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Run a one-line script
+      run: echo Hello, world!
+
+    - name: Run a multi-line script
+      run: |
+        echo Add other tasks to build, test, and deploy your project.
+        echo See https://aka.ms/yaml
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20.x'
+
+    - name: Install Angular CLI
+      run: npm install @angular/cli@17.3.3
+      working-directory: Client
+
+    - name: Install dependencies
+      run: npm install
+      working-directory: Client
+
+    - name: Build the project
+      run: npm run build
+      working-directory: Client
+
+    - name: Package the application for Windows
+      run: npm run make -- --platform=win32
+      working-directory: Client
+
+    - name: Archive the output
+      run: |
+        New-Item -Path Client/out/make -ItemType Directory -Force
+        Compress-Archive -Path Client/out/make -DestinationPath ${{ github.workspace }}/output.zip
+      shell: pwsh
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: drop
+        path: ${{ github.workspace }}/output.zip
