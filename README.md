@@ -21,6 +21,7 @@ Prerequisites
 1. Clone the repository:
 ```
 git clone https://github.com/kubatemer/qhopper.git
+cd Client
 ```
 
 2. Install dependencies:
