@@ -33,7 +33,7 @@ npm run build-electron
 ```
 ## Usage
 ### Connecting to RabbitMQ
-Enter your RabbitMQ server details and click save
+Enter your RabbitMQ server details and click save. Writing the http or https is not required since it adds it automatically.
 
 ![login](docs/login.gif)
 
