@@ -1,0 +1,147 @@
+<div>
+  <div class="top-box">
+    <div>
+      <h1 class="messages-header">Messages</h1>
+    </div>
+    <div class="filter-box">
+      <span class="trigger" [owlDateTimeTrigger]="dt10">
+        <i class="fa-regular fa-calendar-days"></i>
+      </span>
+      <input [formControl]="dateControl" [owlDateTimeTrigger]="dt10" [owlDateTime]="dt10" [selectMode]="'range'"
+        placeholder="Choose a date range" class="datetime-input">
+      <owl-date-time [showSecondsTimer]="true" #dt10></owl-date-time>
+      <div class="button-box">
+        <button mat-raised-button class="clear-button black-white" (click)="filterMessages(true)"
+          matTooltip="Clear filter">Clear</button>
+        <button mat-raised-button class="filter-button" (click)="filterMessages(false)"
+          matTooltip="Filter messages">Filter</button>
+      </div>
+    </div>
+    <div class="fetch-messages-container">
+      <button matTooltip="Delete selected messages" mat-icon-button (click)="deleteMessages()"
+        [disabled]="this.selection.selected.length == 0">
+        <mat-icon aria-hidden="false" aria-label="Add connection icon" fontIcon="delete" class="icons"></mat-icon>
+      </button>
+      
+      <button mat-raised-button class="black-white" (click)="fetchMessages()"
+        matTooltip="Fetch messages (2 seconds cooldown)" matTooltipClass="my-custom-tooltip"
+        [disabled]="this.isOnCooldown || !this.currentSelectedQueue">
+        <ng-container *ngIf="!this.isOnCooldown; else loading">
+          Fetch messages
+        </ng-container>
+        <ng-template #loading>
+          <mat-icon [class.fa-spin]="this.isOnCooldown" aria-hidden="false" aria-label="Progress icon"
+            fontIcon="sync"></mat-icon>
+        </ng-template>
+      </button>
+    </div>
+  </div>
+
+  <cdk-virtual-scroll-viewport *ngIf="messages.length > 0" tvsItemSize="53" class="datetime-wrapper mat-elevation-z2">
+    <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort>
+
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="checkbox">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox class="select-all-checkbox" (change)="toggleAllRows()" [checked]="isAllSelected()">
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="onCheckboxClick($event, row)" [checked]="selection.isSelected(row)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+
+      <!-- message_count Column -->
+      <ng-container matColumnDef="message_count">
+        <th mat-header-cell *matHeaderCellDef class="text-center" mat-sort-header>
+          No.</th>
+        <td mat-cell *matCellDef="let message">{{message.message_count}}</td>
+      </ng-container>
+
+      <!-- type Column -->
+      <ng-container matColumnDef="messageType">
+        <th mat-header-cell *matHeaderCellDef class="text-center"> Title </th>
+        <td mat-cell *matCellDef="let message" class="text-center title-header">{{
+          getPropertyFromPayload(message,'messageType') || 'N/A' }}
+        </td>
+      </ng-container>
+
+      <!-- message_id Column -->
+      <ng-container matColumnDef="messageId">
+        <th mat-header-cell *matHeaderCellDef class="text-center"> Message ID </th>
+        <td mat-cell *matCellDef="let message" class="text-center">{{message.properties.message_id ||
+          getPropertyFromPayload(message, 'messageId') || 'N/A' }}</td>
+      </ng-container>
+
+      <!-- correlation_id Column -->
+      <ng-container matColumnDef="correlationId">
+        <th mat-header-cell *matHeaderCellDef class="text-center"> Correlation ID </th>
+        <td mat-cell *matCellDef="let message" class="text-center">{{ message.properties.correlation_id ||
+          getPropertyFromPayload(message, 'correlationId') || 'N/A' }}</td>
+      </ng-container>
+
+      <!-- conversation_id Column -->
+      <ng-container matColumnDef="conversationId">
+        <th mat-header-cell *matHeaderCellDef class="text-center"> Conversation ID </th>
+        <td mat-cell *matCellDef="let message" class="text-center">{{message.properties.headers?.conversation_id ||
+          getPropertyFromPayload(message, 'conversationId') || 'N/A' }}</td>
+      </ng-container>
+
+      <!-- sentTime Column -->
+      <ng-container matColumnDef="sentTime">
+        <th mat-header-cell *matHeaderCellDef class="text-center" matTooltip="Format: DD-MM-YYYY HH:mm:ss"
+          matTooltipClass="my-custom-tooltip"> Time Sent
+        </th>
+        <td mat-cell *matCellDef="let message" class="text-center">{{ formatSentTime(getPropertyFromPayload(message,
+          'sentTime'))}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="expand">
+        <th mat-header-cell class="text-center" *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+        <td mat-cell class="text-center" *matCellDef="let message">
+          <button mat-icon-button aria-label="expand row"
+            (click)="(expandedMessage = expandedMessage === message ? null : message); $event.stopPropagation()">
+            @if (expandedMessage === message) {
+            <mat-icon>keyboard_arrow_up</mat-icon>
+            } @else {
+            <mat-icon>keyboard_arrow_down</mat-icon>
+            }
+          </button>
+        </td>
+      </ng-container>
+
+
+      <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+      <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let message" [attr.colspan]="columnsToDisplayWithExpand.length">
+          <div class="message-detail" [@detailExpand]="message == expandedMessage ? 'expanded' : 'collapsed'">
+            <app-message-details [message]="message"></app-message-details>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand; sticky: true"></tr>
+      <tr mat-row *matRowDef="let message; columns: columnsToDisplayWithExpand;" class="message-row"
+        [class.example-expanded-row]="expandedMessage === message" draggable="true"
+        (dragstart)="onDragStart($event, message)" (dragend)="onDragEnd($event)">
+      </tr>
+
+      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+    </table>
+  </cdk-virtual-scroll-viewport>
+</div>
+
+<div *ngIf="messages.length === 0" class="no-rows-placeholder">
+  <p>No messages available</p>
+</div>
+
+<div class="selected-rows-box" *ngIf="messages.length > 0">
+  <span class="selected-rows">{{selection.selected.length}} Rows selected</span>
+</div>
+
+
+<span matBadge="drag-preview" class="drag-preview" #dragPreviewTemplate matBadge="{{ selection.selected.length }}"
+  matBadgeColor="primary" matBadgePosition="before" matBadgeSize="large">
+</span>

@@ -1,0 +1,46 @@
+.top-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #040519;
+  margin-left: 5%;
+}
+
+.top-upper-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.top-upper-box-user {
+  display: flex;
+  align-items: center;
+}
+
+.form-floating {
+  margin-top: 0.5%;
+  margin-bottom: 7%;
+  margin-right: 1.2%;
+}
+
+.form-select {
+  border-radius: 0;
+  height: 3rem;
+  min-height: 3rem;
+  padding-bottom: 1%;
+}
+
+.bi-cloud-plus,
+.bi-trash3 {
+  transform: scale(0.9);
+}
+
+.selected-user {
+  color: white;
+  margin: 0 0.4rem;
+}
+
+.icons {
+  color: white;
+}

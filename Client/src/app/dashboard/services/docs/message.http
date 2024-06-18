@@ -1,0 +1,21 @@
+@hostname = localhost
+@port = 15672
+@host = {{hostname}}:{{port}}
+@username = guest
+@password = guest
+@credentials = {{username}}:{{password}}
+
+# Get all messages of a queue for a given vhost and queue
+# @prompt vhost
+# @prompt queue
+POST http://{{host}}/api/queues/{{vhost}}/{{queue}}/get
+Authorization: Basic {{credentials}}
+Content-Type: application/json
+
+{
+    "count":10,
+    "ackmode":"ack_requeue_true",
+    "encoding":"auto",
+    "truncate":50000
+}
+

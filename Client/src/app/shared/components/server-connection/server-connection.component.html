@@ -1,0 +1,31 @@
+<mat-toolbar class="qhopper-header" fxLayoutAlign="center center">QHopper</mat-toolbar>
+
+<form [formGroup]="connectionForm" (submit)="onSubmit()" class="connect-form">
+  <mat-form-field fxFlexFill>
+    <mat-label>Host</mat-label>
+    <input matInput formControlName="host" required />
+  </mat-form-field>
+
+  <div fxLayout="row">
+    <mat-form-field class="connection-form-bottom-input">
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="username" required />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input formControlName="password" matInput [type]="hide ? 'password' : 'text'" required />
+      <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide Password'" [attr.aria-pressed]="hide">
+        <mat-icon>
+          {{ hide ? "visibility_off" : "visibility" }}
+        </mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+
+  <div class="connect-form-submit-div">
+    <button class="connect-form-submit" mat-raised-button type="submit">
+      Save
+    </button>
+  </div>
+</form>

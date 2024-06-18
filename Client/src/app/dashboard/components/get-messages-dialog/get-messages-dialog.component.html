@@ -1,0 +1,16 @@
+<h2 mat-dialog-title class="black-white">Retrieving Messages</h2>
+
+<div class="big-box">
+  <mat-dialog-content class="spinner-box">
+    <div style="color: #040519" class="la-square-loader la-2x">
+      <div></div>
+    </div>
+    <div class="loader-span">
+      <span>Loading messages ... This may take up to a minute. Please be patient.</span>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="bottom-box">
+    <button mat-raised-button [mat-dialog-close]="true" cdkFocusInitial color="warn" type="button">Cancel</button>
+  </mat-dialog-actions>
+</div>

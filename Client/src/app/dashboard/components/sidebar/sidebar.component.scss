@@ -1,0 +1,77 @@
+* {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+mat-tree {
+  background-color: transparent;
+  width: 100%;
+}
+
+mat-icon {
+  font-size: 20px;
+  height: 20px;
+  width: 20px;
+}
+
+mat-tree-node {
+  min-height: 2rem;
+}
+
+.sidebar-text {
+  font-size: 0.8rem;
+  color: white;
+  cursor: pointer;
+}
+
+.vhost-arrow {
+  color: white;
+}
+
+.expand-button {
+  padding: 0.25rem 0;
+  align-items: center;
+  display: flex;
+  width: 100%;
+  border: none;
+  background-color: inherit;
+}
+
+.queue-text {
+  font-size: 0.7rem;
+  font-weight: lighter;
+  margin-bottom: 2% !important;
+  color: white;
+  transition: 0.4s ease-in-out;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+
+.queue-text:hover {
+  font-size: 0.8rem;
+}
+
+li {
+  margin-left: 10px;
+  color: white;
+}
+
+.selected-node {
+  font-weight: 500;
+  font-size: 0.8rem;
+  color: rgb(149, 228, 228);
+}
+
+.droppable {
+  background: lightgray;
+
+  .queue-text {
+    background-color: lightgray;
+  }
+}
+
+.drag-target {
+  * {
+    pointer-events: none;
+  }
+}

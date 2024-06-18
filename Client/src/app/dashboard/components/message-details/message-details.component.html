@@ -1,0 +1,32 @@
+@if (message) {
+<div class="message-diagram" fxLayout="column" fxLayoutAlign="space-around center" fxFlexFill>
+    <mat-divider class="message-top-divider"></mat-divider>
+    <div fxLayout="column" class="message-property-header-box">
+        <span class="message-property-payload-value text-center">HEADERS</span>
+        <div *ngIf="message?.properties" class="message-properties-box message-header">
+            <div *ngFor="let key of getObjectKeys(message.properties)">
+                <div *ngIf="key === 'headers'">
+                    <div *ngFor="let headerKey of getObjectKeys(message.properties?.[key])">
+                        {{ headerKey }}: {{ message.properties?.[key]?.[headerKey] }}
+                    </div>
+                </div>
+                <div *ngIf="key !== 'headers'">
+                    {{ key }}: {{ message.properties?.[key] }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <mat-divider class="message-bottom-divider"></mat-divider>
+
+    <div fxLayout="column" class="message-property-payload-box text-center">
+        <span class="message-property-payload-value">PAYLOAD</span>
+        <ng-container *ngIf="message.payload; else emptyPayload">
+            <textarea [readOnly]="true" class="message-payload">{{message.payload}}</textarea>
+        </ng-container>
+        <ng-template #emptyPayload>
+            <div class="empty-payload-message text-center">No payload available</div>
+        </ng-template>
+    </div>
+</div>
+}

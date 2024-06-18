@@ -1,0 +1,49 @@
+.message-diagram {
+  margin-bottom: 1%;
+}
+
+.message-bottom-divider {
+  border: 1px solid #dbdbdb7e;
+  width: 80%;
+}
+
+.message-top-divider {
+  border: 1px solid #dbdbdb7e;
+  width: 100%;
+}
+
+.message-property-payload-box, .message-property-header-box{
+  margin: 1%;
+}
+
+.message-payload {
+  padding: 0.5%;
+  width: 70vw;
+  height: 25vh;
+  border: solid #dbdbdb7e;
+  color: rgb(51, 51, 51);
+}
+
+.message-header {
+  padding: 1%;
+  width: 80vw;
+  height: 15vh;
+  border: solid #dbdbdb7e;
+  color: rgb(51, 51, 51);
+}
+
+.message-property-header-value,
+.message-property-payload-value {
+  font-weight: bold;
+
+}
+
+textarea {
+  resize: vertical;
+}
+
+.message-properties-box {
+  max-height: 200px;
+  width: 50vw;
+  overflow-y: auto;
+}

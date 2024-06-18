@@ -1,0 +1,31 @@
+<div class="top-box">
+  <div class="top-upper-box">
+    <div class="top-upper-box-user">
+      <mat-icon matTooltip="Current user" aria-hidden="false" aria-label="Person icon" fontIcon="account_circle"
+        class="icons"></mat-icon>
+      @if (selectedConnection) {
+      <p class="selected-user">{{ selectedConnection.username }}</p>
+      }
+    </div>
+    <div>
+      <button matTooltip="Add new connection" mat-icon-button (click)="openConnectionDialog()">
+        <mat-icon aria-hidden="false" aria-label="Add connection icon" fontIcon="add_circle" class="icons"></mat-icon>
+      </button>
+
+      <button matTooltip="Delete current connection" mat-icon-button (click)="openDialogDelete()">
+        <mat-icon aria-hidden="false" aria-label="Trash icon" fontIcon="delete" class="icons"></mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="form-floating">
+    <select #connection class="form-select form-select-sm" aria-label="Select connection"
+      [(ngModel)]="selectedConnection" (ngModelChange)="onSelectedConnectionChange($event)">
+      @for (connection of connections; track connection) {
+      <option [ngValue]="connection">{{
+        connection.host }}</option>
+      }
+    </select>
+    <label for="floatingSelect">Connections</label>
+  </div>
+  <app-refresh></app-refresh>
+</div>

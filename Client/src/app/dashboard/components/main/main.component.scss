@@ -1,0 +1,34 @@
+.big-box {
+    height: 100%;
+}
+
+.left-box {
+    background-color: #040519;
+    padding: 1rem;
+    overflow-y: auto;
+    width: 24vw;
+}
+
+.right-box {
+    width: 100%;
+    background: #eceffc;
+}
+
+.right-bottom-box {
+    background-color: #eceffc;
+}
+
+::ng-deep .mat-mdc-checkbox label {
+    color: white !important;
+}
+
+#dummy-data::ng-deep .mdc-checkbox__background {
+    border-color: white !important;
+}
+
+:host ::ng-deep .mat-progress-spinner circle,
+.mat-spinner circle {
+    stroke: #040519 !important;
+    fill: #040519 !important;
+    color: #040519 !important;
+}

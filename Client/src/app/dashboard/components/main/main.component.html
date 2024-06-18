@@ -1,0 +1,10 @@
+<div fxLayout="row" class="big-box">
+  <div class="left-box">
+    <app-sidebar [incomingQueue]="currentQueue!" (selectedConnectionChange)="onSelectedConnectionChange($event)" (currentQueueChange)="onCurrentQueueChange($event)" (moveMessagesEvent)="onMoveMessagesEvent($event)" [vhosts]="vhosts"></app-sidebar>
+  </div>
+  <div class="right-box" fxLayout="column" fxLayoutAlign=" none">
+    <div class="right-bottom-box">
+      <app-messages (deleteMessagesEvent)="onDeleteMessagesEvent()" [currentSelectedQueue]="currentQueue" (fetchMessage)="fetchMessages($event)" [messages]=messages [selection]="selectedMessages"></app-messages>
+    </div>
+  </div>
+</div>

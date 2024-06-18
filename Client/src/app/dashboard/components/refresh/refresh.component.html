@@ -1,0 +1,18 @@
+<div class="refresh-box">
+  <div class="form-floating refresh-dropdown">
+    <select class="form-select" aria-label="Select a refresh rate" [(ngModel)]="selectedRefreshRateOption"
+      (ngModelChange)="setRefreshRate()">
+      @for (option of this.getRefreshRateOptions(); track option) {
+      <option [value]="option.rateInMilliseconds">{{ option.description }}</option>
+      }
+    </select>
+    <label for="floatingSelect">Connection refresh rate</label>
+  </div>
+
+  <button matTooltip="Refresh connection (1 second cooldown)" mat-icon-button matTooltipClass="my-custom-tooltip"
+    aria-label="Button that refreshes connection now" class="fetch-button icons" (click)="refreshButtonClicked()"
+    [disabled]="this.isOnCooldown">
+    <mat-icon [class.fa-spin]="this.isOnCooldown" aria-hidden="false" aria-label="Progress icon"
+      fontIcon="refresh"></mat-icon>
+  </button>
+</div>

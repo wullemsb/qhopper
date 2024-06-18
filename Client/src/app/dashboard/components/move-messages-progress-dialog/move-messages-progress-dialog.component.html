@@ -1,0 +1,24 @@
+<h2 mat-dialog-title class="black-white">Moving Messages</h2>
+
+<div class="big-box">
+  <mat-dialog-content class="text-center">
+    @if (messageStatus.status === MessagesActionStatus.IN_PROGRESS)
+    {
+    <div style="color: #040519" class="la-ball-clip-rotate la-2x">
+      <div></div>
+    </div>
+    }
+    @else{
+    <i class="fa-solid fa-circle-check fa-beat check-sign"></i>
+    }
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="bottom-box">
+    <div class="center">{{this.messageStatus.amountOfMessagesProcessed}}/{{this.messageStatus.amountOfMessagesToProcess}}<br>
+    </div>
+    <div class="center"><span class="{{this.dotColorClass}}">&#x25cf; </span>{{this.statusText}}</div>
+    <div class="center">{{this.infoText}}</div>
+    <button mat-raised-button color="warn" class="{{this.buttonColorClass}}" [mat-dialog-close]="true"
+      (click)="onButtonClick()">{{this.buttonText}}</button>
+  </mat-dialog-actions>
+</div>

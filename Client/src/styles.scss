@@ -1,0 +1,26 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.bdrop {
+    backdrop-filter: blur(4px);
+}
+
+.my-custom-tooltip .mdc-tooltip__surface {
+    max-width: unset;
+}
+
+.black-white {
+    background-color: #040519 !important;
+    color: white !important;
+}
+
+@import "@danielmoncada/angular-datetime-picker/assets/style/picker.min.css";

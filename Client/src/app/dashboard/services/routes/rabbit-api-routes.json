@@ -1,0 +1,5 @@
+{
+    "VHOSTS" : "/api/vhosts/",
+    "QUEUES" : "/api/queues/",
+    "EXCHANGES" : "/api/exchanges/"
+}

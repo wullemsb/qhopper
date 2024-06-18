@@ -1,0 +1,31 @@
+.yellow-dot {
+  color: yellow;
+}
+
+.green-dot {
+  color: rgb(151, 228, 37);
+}
+
+.check-icon {
+  transform: scale(3);
+  color: #040519;
+}
+
+.big-box {
+  margin: 0 auto;
+}
+
+.bottom-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+
+button {
+  margin-top: 10%;
+}
+
+.check-sign {
+  font-size: 5rem;
+  color: #040519;
+}

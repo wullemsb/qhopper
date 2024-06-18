@@ -1,0 +1,39 @@
+@hostname = localhost
+@port = 15672
+@host = {{hostname}}:{{port}}
+@username = guest
+@password = guest
+@credentials = {{username}}:{{password}}
+
+# Get all vhosts
+GET http://{{host}}/api/vhosts
+Authorization: Basic {{credentials}}
+
+###
+
+# Get a specific vhost
+# @prompt vhost-name
+GET http://{{host}}/api/vhosts/{{vhost-name}}
+Authorization: Basic {{credentials}}
+
+###
+
+# Create/Update a vhost
+# @prompt vhost-name
+# @prompt description
+# @prompt tags
+PUT http://{{host}}/api/vhosts/{{vhost-name}}
+Authorization: Basic {{credentials}}
+Content-Type: application/json
+
+{
+    "description": "{{description}}",
+    "tags": "{{tags}}"
+}
+
+###
+
+# Get definitions for a specific vhost
+# @prompt vhost-name
+Get http://{{host}}/api/definitions/{{vhost-name}}
+Authorization: Basic {{credentials}}

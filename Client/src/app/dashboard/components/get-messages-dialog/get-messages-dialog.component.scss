@@ -1,0 +1,26 @@
+.header {
+  background-color: #040519;
+  color: white;
+}
+
+.big-box {
+  margin: 0 auto;
+}
+
+.bottom-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+
+.spinner-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.loader-span {
+  margin-top: 3%;
+}

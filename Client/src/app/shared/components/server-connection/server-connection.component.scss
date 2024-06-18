@@ -1,0 +1,27 @@
+.connect-form {
+  padding: 1.3%;
+}
+
+.connect-form-submit {
+  border-radius: 0;
+  background-color: #040519 !important;
+  color: white !important;
+}
+
+.connection-form-bottom-input {
+  margin-right: 1.3%;
+}
+
+.connect-form-submit-div{
+  text-align: center;
+  margin: 1.3%;
+}
+
+.qhopper-header{
+  background-color: #040519;
+  color: white;
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-floating-label, .mdc-text-field--filled:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-floating-label--float-above{
+  color: red;
+}
