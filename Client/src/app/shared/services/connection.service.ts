@@ -110,23 +110,18 @@ export class ConnectionService {
 
   // Delete the connection with the given name
   deleteConnection(connection: ConnectionModel): ConnectionModel[] {
-    let connections: { [key: string]: ConnectionModel } = {};
-    const storedData = localStorage.getItem(this.CONNECTIONS_DATA);
-    const keyValue = connection.host + connection.username;
+    let connections = this.getAllConnections();
+    connections = connections.filter(
+      (conn) =>
+        conn.host !== connection.host ||
+        conn.username !== connection.username ||
+        conn.password !== connection.password
+    );
 
-    if (storedData) {
-      const decryptedData = CryptoJS.AES.decrypt(storedData, this.ENCRYPTION_KEY).toString(CryptoJS.enc.Utf8);
-      connections = JSON.parse(decryptedData) || {};
-    }
+    const encryptedData = CryptoJS.AES.encrypt(JSON.stringify(connections), this.ENCRYPTION_KEY).toString();
+    localStorage.setItem(this.CONNECTIONS_DATA, encryptedData);
 
-    if (connections[keyValue]) {
-      delete connections[keyValue];
-      const encryptedData = CryptoJS.AES.encrypt(JSON.stringify(connections), this.ENCRYPTION_KEY).toString();
-      localStorage.setItem(this.CONNECTIONS_DATA, encryptedData);
-      this.connections = this.getAllConnections();
-    }
-
-    // Return the updated connections list
+    this.connections = connections;
     return this.connections;
   }
 }

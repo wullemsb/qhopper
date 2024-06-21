@@ -1,0 +1,27 @@
+.search-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #040519;
+    margin-left: 4.5%;
+  }
+  
+  .search-box .form-floating {
+    margin-top: 5%;
+    margin-bottom: 0;
+    margin-right: 1.2%;
+    flex-grow: 1;
+  }
+  
+  .search-box .form-input {
+    border-radius: 0;
+    height: 3rem;
+    min-height: 3rem;
+    padding-bottom: 1%;
+    width: 100%;
+  }
+  
+  .search-box .search-icon {
+    color: white;
+    cursor: pointer;
+  }

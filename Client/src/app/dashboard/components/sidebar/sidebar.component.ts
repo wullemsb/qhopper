@@ -34,6 +34,8 @@ export class SidebarComponent implements OnChanges {
   expandedNodes: Set<string> = new Set<string>();
   dataFromSubscription = false;
   private subscription!: Subscription;
+  filteredVhosts: VhostModel[] = [];
+  showNoQueuesFoundMessage = false;
 
   onSelectedConnectionChange(value: ConnectionModel) {
     this.selectedConnectionChange.emit(value);
@@ -96,6 +98,74 @@ export class SidebarComponent implements OnChanges {
     this.dataSource.data = toTreeNodes(this.vhosts);
   }
 
+  onSearchChange(searchTerm: string): void {
+    if (!searchTerm.trim()) {
+      // If search term is empty, reset to show all vhosts and queues
+      this.showNoQueuesFoundMessage = false;
+      this.getVhosts();
+      return;
+    }
+  
+    // Find all queue nodes that contain the search term in their name
+    const matchingQueueNodes = this.treeControl.dataNodes.filter(node =>
+      node.name.toLowerCase().includes(searchTerm.toLowerCase()) && node.level === 1
+    );
+  
+    if (matchingQueueNodes.length > 0) {
+      this.showNoQueuesFoundMessage = false;
+      // Expand all parent vhost nodes that contain matching queues
+      matchingQueueNodes.forEach(matchingQueueNode => {
+        const parentNode = this.treeControl.dataNodes.find(node =>
+          node.name === matchingQueueNode.parent && node.level === 0
+        );
+  
+        if (parentNode) {
+          // Expand the parent vhost node
+          this.treeControl.expand(parentNode);
+        }
+      });
+  
+      // Create a new NodeModel instance for the first matching queue
+      const newQueue = new NodeModel(matchingQueueNodes[0].name);
+      newQueue.parent = matchingQueueNodes[0].parent;
+      newQueue.children_count = matchingQueueNodes[0].children_count;
+  
+      // Set the current queue
+      this.setCurrentQueue(newQueue);
+    } else {
+      this.showNoQueuesFoundMessage = true;
+      this.treeControl.collapseAll();
+    }
+  }
+
+  setCurrentQueue(newQueue: NodeModel) {
+    // Done do anything if the new queue is the same as the currently active queue
+    if (this.activeNode && this.activeNode.name === newQueue.name && this.activeNode.parent === newQueue.parent) {
+      return;
+    }
+
+    // Set the last active queue
+    this.lastActiveNode = this.activeNode;
+
+    // Change current queue
+    this.activeNode = newQueue;
+    this.currentQueueChange.emit({ vhostName: newQueue.parent, name: newQueue.name });
+    
+    if (this.lastActiveNode) {
+      // Remove 'selected-node' class from last active queue
+      const element = document.querySelector(`[data-node-name="${this.lastActiveNode.name}"]`);
+      if (element) {
+        element.classList.remove('selected-node');
+      }
+    }
+
+    // Add 'selected-node' class to the new active queue
+    const newElement = document.querySelector(`[data-node-name="${newQueue.name}"]`);
+    if (newElement) {
+      newElement.classList.add('selected-node');
+    }
+  }
+
   nodeToggled(node: FlatNode): void {
     if (this.treeControl.isExpanded(node)) {
       this.expandedNodes.add(node.name);
@@ -113,37 +183,11 @@ export class SidebarComponent implements OnChanges {
     });
 
     if (this.activeNode) {
-
       // Add 'selected-node' class to the last selected queue
       const selectedElement = document.querySelector(`[data-node-name="${this.activeNode!.name}"]`);
       if (selectedElement) {
         selectedElement.classList.add('selected-node');
       }
-    }
-  }
-
-  setCurrentQueue(newQueue: NodeModel) {
-
-    // Done do anything if the new queue is the same as the currently active queue
-    if (this.activeNode && this.activeNode.name === newQueue.name && this.activeNode.parent === newQueue.parent) {
-      return;
-    }
-
-    // Set the last active queue
-    this.lastActiveNode = this.activeNode!;
-
-    // Change current queue
-    this.activeNode = newQueue;
-    this.currentQueueChange.emit({ vhostName: newQueue.parent, name: newQueue.name });
-    
-    if (this.lastActiveNode) {
-
-      // Remove 'selected-node' class from last active queue
-      const element = document.querySelector(`[data-node-name="${this.lastActiveNode!.name}"]`);
-      if (element) {
-        element.classList.remove('selected-node');
-      }
-
     }
   }
 

@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ServerConnectionComponent } from '../../../shared/components/server-connection/server-connection.component';
 import { ConnectionModel } from '../../../shared/models/connection.model';
 import { ConnectionService } from '../../../shared/services/connection.service';
-import { DeleteConnectionComponent } from '../delete-connection/delete-connection.component';
+import { DeleteConnectionComponent } from '../delete-connection-confirmation-dialog/delete-connection-confirmation-dialog.component';
 
 @Component({
   selector: 'app-connections',

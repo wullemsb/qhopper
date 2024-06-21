@@ -4,18 +4,23 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MessagesComponent, MessageModel } from './messages.component';
 import { Component, EventEmitter, Output } from '@angular/core';
-import { MatTableModule } from '@angular/material/table'; 
+import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button'; 
+import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
-
-@Component({selector: 'app-refresh', template: ''})
-class RefreshComponent {}
+import { DatePipe } from '@angular/common';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from '@danielmoncada/angular-datetime-picker';
+import { ReactiveFormsModule } from '@angular/forms';
+import { TableVirtualScrollModule } from 'ng-table-virtual-scroll';
+import { MatBadgeModule } from '@angular/material/badge';
+import { ToastrService, ToastrModule } from 'ngx-toastr';
 
 describe('MessagesComponent', () => {
   let component: MessagesComponent;
   let fixture: ComponentFixture<MessagesComponent>;
   let selection: SelectionModel<MessageModel>;
+  let datePipe: DatePipe;
+  let toastrService: ToastrService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -25,11 +30,20 @@ describe('MessagesComponent', () => {
         MatTableModule,
         MatIconModule,
         MatButtonModule,
-        MatToolbarModule
+        MatToolbarModule,
+        OwlDateTimeModule,
+        OwlNativeDateTimeModule,
+        ReactiveFormsModule,
+        TableVirtualScrollModule,
+        MatBadgeModule,
+        ToastrModule.forRoot()
       ],
-      declarations: [MessagesComponent, RefreshComponent]
-    })
-      .compileComponents();
+      declarations: [MessagesComponent],
+      providers: [DatePipe]
+    }).compileComponents();
+
+    datePipe = TestBed.inject(DatePipe);
+    toastrService = TestBed.inject(ToastrService);
   });
 
   beforeEach(() => {
@@ -40,6 +54,7 @@ describe('MessagesComponent', () => {
       { message_count: 1, properties: { cluster_id: 'cluster1', correlation_id: 'correlation1' }, payload: 'payload1' },
       { message_count: 2, properties: { cluster_id: 'cluster2', correlation_id: 'correlation2' }, payload: 'payload2' }
     ];
+    component.dataSource.data = component.messages;
     component.selection = selection;
     fixture.detectChanges();
   });

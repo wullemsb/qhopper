@@ -26,7 +26,7 @@ describe('ConnectionService', () => {
     const connection2: ConnectionModel = { host: 'test2.com', username: 'user2', password: 'pass2' };
     service.addConnection('Test1', connection);
     service.addConnection('Test2', connection2);
-    service.deleteConnection('Test1');
+    service.deleteConnection(connection);
     const connectionsAfter = service.getAllConnections().length;
     expect(connectionsAfter).toEqual(1);
   });
@@ -41,8 +41,8 @@ describe('ConnectionService', () => {
   });
 
   it('should get all connection names', () => {
-    const connection: ConnectionModel = { host: 'test.com', username: 'user', password: 'pass' };
-    const connection2: ConnectionModel = { host: 'test2.com', username: 'user2', password: 'pass2' };
+    let connection: ConnectionModel = { host: 'test.com', username: 'user', password: 'pass' };
+    let connection2: ConnectionModel = { host: 'test2.com', username: 'user2', password: 'pass2' };
     service.addConnection('Test1', connection);
     service.addConnection('Test2', connection2);
     const connectionNames = service.getConnectionNames();

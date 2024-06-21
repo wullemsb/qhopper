@@ -6,8 +6,8 @@ import { ConnectionModel } from '../../../shared/models/connection.model';
 
 @Component({
   selector: 'app-delete-connection',
-  templateUrl: './delete-connection.component.html',
-  styleUrl: './delete-connection.component.scss'
+  templateUrl: 'delete-connection-confirmation-dialog.component.html',
+  styleUrl: 'delete-connection-confirmation-dialog.component.scss'
 })
 
 export class DeleteConnectionComponent {

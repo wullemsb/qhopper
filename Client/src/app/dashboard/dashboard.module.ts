@@ -34,10 +34,11 @@ import { MainComponent } from './components/main/main.component';
 import { MessagesComponent } from './components/messages/messages.component';
 import { RefreshComponent } from './components/refresh/refresh.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { SearchBarComponent } from './components/searchbar/searchbar.component';
 
 // Services
 import { Md5 } from 'ts-md5';
-import { DeleteConnectionComponent } from './components/delete-connection/delete-connection.component';
+import { DeleteConnectionComponent } from './components/delete-connection-confirmation-dialog/delete-connection-confirmation-dialog.component';
 import { GetMessagesDialog } from './components/get-messages-dialog/get-messages-dialog.component';
 import { MessageDetailsComponent } from './components/message-details/message-details.component';
 import { MoveMessagesConfirmationDialog } from './components/move-messages-confirmation-dialog/move-message-confirmation-dialog.component';
@@ -55,6 +56,7 @@ import { DeleteMessagesProgressDialog } from './components/delete-messages-progr
         MessagesComponent,
         MessageDetailsComponent,
         RefreshComponent,
+        SearchBarComponent,
         MoveMessagesConfirmationDialog,
         MoveMessagesProgressDialog,
         GetMessagesDialog,

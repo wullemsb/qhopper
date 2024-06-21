@@ -197,4 +197,3 @@ export class MessagesComponent implements OnChanges {
 }
 
 export { MessageModel };
-

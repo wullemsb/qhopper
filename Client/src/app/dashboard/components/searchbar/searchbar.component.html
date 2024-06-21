@@ -1,0 +1,9 @@
+<div class="search-box">
+  <div class="form-floating">
+    <input matInput class="form-input" [formControl]="searchControl" placeholder="Search Queues" aria-label="Search Queues">
+    <label for="floatingSearch"></label>
+  </div>
+  <button mat-icon-button matTooltip="Search" matTooltipClass="my-custom-tooltip" aria-label="Button that triggers search" class="search-icon" (click)="onSearchChange()">
+    <mat-icon aria-hidden="false" aria-label="Search icon">search</mat-icon>
+  </button>
+</div>

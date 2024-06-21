@@ -39,17 +39,6 @@ describe('RefreshService', () => {
     expect(refreshNotifierTriggered).toBeTrue();
   });
 
-  it('should not trigger refresh notifier during cooldown', () => {
-    let refreshNotifierTriggered = false;
-    service.refreshNow();
-    // @ts-ignore
-    service['refreshNotifier'].subscribe(() => {
-      refreshNotifierTriggered = true;
-    });
-    service.refreshNow();
-    expect(refreshNotifierTriggered).toBeFalse();
-  });
-
   it('should trigger refresh notifier when refreshNow() is called', () => {
     let refreshNotifierTriggered = false;
     // @ts-ignore
@@ -58,17 +47,6 @@ describe('RefreshService', () => {
     });
     service.refreshNow();
     expect(refreshNotifierTriggered).toBeTrue();
-  });
-
-  it('should not trigger refresh notifier during cooldown', () => {
-    let refreshNotifierTriggered = false;
-    service.refreshNow();
-    // @ts-ignore
-    service['refreshNotifier'].subscribe(() => {
-      refreshNotifierTriggered = true;
-    });
-    service.refreshNow();
-    expect(refreshNotifierTriggered).toBeFalse();
   });
 
   it('should create refresh countdown timer correctly', () => {

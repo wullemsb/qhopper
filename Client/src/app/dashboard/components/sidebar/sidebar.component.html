@@ -1,6 +1,13 @@
 <app-connections (selectedConnectionChange)="onSelectedConnectionChange($event)"></app-connections>
-<mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+<app-searchbar (searchChange)="onSearchChange($event)"></app-searchbar>
 
+  <!-- Display 'No queues found' message if no matching queues -->
+  <div class="no-queues-found" *ngIf="showNoQueuesFoundMessage">
+    No queues found
+  </div>
+
+
+<mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
   <!-- This is the tree node for queues -->
   <mat-tree-node [attr.data-node-name]="node.name" [ngClass]="{ 'selected-node': activeNode == node }"
     class="leaf-node queue-text drag-target" *matTreeNodeDef="let node" (drop)="onDrop($event, node)"
