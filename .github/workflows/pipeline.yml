@@ -39,6 +39,11 @@ jobs:
       run: npm run build
       working-directory: Client
 
+    - name: Run Angular tests
+      run: |
+        npm run test -- --watch=false --no-progress --browsers=ChromeHeadlessNoSandbox
+      working-directory: Client
+
     - name: Package the application for Windows
       run: npm run make -- --platform=win32
       working-directory: Client
@@ -54,3 +59,5 @@ jobs:
       with:
         name: drop
         path: ${{ github.workspace }}/output.zip
+        
+    
