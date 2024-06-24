@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches:
-      - main
-      - dev
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -40,8 +40,7 @@ jobs:
       working-directory: Client
 
     - name: Run Angular tests
-      run: |
-        npm run test -- --watch=false --no-progress --browsers=ChromeHeadlessNoSandbox
+      run: npm run test:ci
       working-directory: Client
 
     - name: Package the application for Windows
