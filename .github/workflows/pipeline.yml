@@ -40,7 +40,7 @@ jobs:
       working-directory: Client
 
     - name: Run Angular tests
-      run: npm test
+      run: npm run test --watch=false --browsers=ChromeHeadless
       working-directory: Client
 
     - name: Package the application for Windows
