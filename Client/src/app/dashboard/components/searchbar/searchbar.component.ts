@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-searchbar',
@@ -12,8 +11,7 @@ export class SearchBarComponent {
   @Output() searchChange: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() {
-    // Subscribe to value changes with debounceTime
-    this.searchControl.valueChanges.pipe(debounceTime(700)).subscribe(() => {
+    this.searchControl.valueChanges.subscribe(() => {
       this.onSearchChange();
     });
   }

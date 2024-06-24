@@ -30,16 +30,15 @@ export class ConnectionService {
   getAllConnections(): ConnectionModel[] {
     const connectionNames = this.getConnectionNames();
     const allConnections: ConnectionModel[] = [];
+    const encryptedData = localStorage.getItem(this.CONNECTIONS_DATA);
 
-    for (const name of connectionNames) {
-      const encryptedData = localStorage.getItem(this.CONNECTIONS_DATA);
 
-      if (encryptedData) {
-        const decryptedData = CryptoJS.AES.decrypt(encryptedData, this.ENCRYPTION_KEY).toString(CryptoJS.enc.Utf8);
-        const connections: { [key: string]: any } = JSON.parse(decryptedData) || {};
+    if (encryptedData) {
+      const decryptedData = CryptoJS.AES.decrypt(encryptedData, this.ENCRYPTION_KEY).toString(CryptoJS.enc.Utf8);
+      const connections: { [key: string]: ConnectionModel } = JSON.parse(decryptedData) || {};
 
+      for (const name of connectionNames) {
         const connection = connections[name];
-
         if (connection) {
           allConnections.push(connection);
         }

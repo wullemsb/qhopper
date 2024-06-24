@@ -9,7 +9,7 @@
     "start": "electron-forge start",
     "build": "ng build --base-href ./",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
+    "test": "ng test --no-watch --no-progress --browsers=ChromeHeadless",
     "build-electron": "ng build --base-href ./ && electron .",
     "start-electron": "electron .",
     "package": "electron-forge package",

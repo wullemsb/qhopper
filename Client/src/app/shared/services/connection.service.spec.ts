@@ -6,6 +6,7 @@ describe('ConnectionService', () => {
   let service: ConnectionService;
 
   beforeEach(() => {
+    localStorage.clear();
     TestBed.configureTestingModule({
       providers: [ConnectionService]
     });
