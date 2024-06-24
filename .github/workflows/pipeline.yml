@@ -40,7 +40,7 @@ jobs:
       working-directory: Client
 
     - name: Run Angular tests
-      run: npm run test:ci
+      run: npm test
       working-directory: Client
 
     - name: Package the application for Windows
