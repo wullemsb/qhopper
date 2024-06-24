@@ -13,7 +13,7 @@
     "build-electron": "ng build --base-href ./ && electron .",
     "start-electron": "electron .",
     "package": "electron-forge package",
-    "make": "electron-forge make",
+    "make": "electron-forge make"
   },
   "private": true,
   "dependencies": {
