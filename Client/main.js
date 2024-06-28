@@ -1,5 +1,5 @@
 const { app, BrowserWindow } = require('electron')
-
+const path = require('path');
 const env = process.env.NODE_ENV || 'development';
 
 const createWindow = () => {
@@ -11,6 +11,7 @@ const createWindow = () => {
     minHeight: 800,
     frame: true,
     autoHideMenuBar: true,
+    icon: path.join(__dirname, 'src/assets/icon.ico'),
     webPreferences: {
       nodeIntegration:true
     }
