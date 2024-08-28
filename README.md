@@ -22,7 +22,7 @@ Prerequisites
 #
 1. Clone the repository:
 ```
-git clone https://github.com/kubatemer/qhopper.git
+git clone https://github.com/wullemsb/qhopper.git
 cd Client
 ```
 
