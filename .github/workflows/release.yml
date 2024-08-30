@@ -1,0 +1,67 @@
+on:
+  push:
+    tags:
+      - 'v*'  # Triggers the workflow on version tags
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+       steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+
+    - name: Install Angular CLI
+      run: npm install @angular/cli@17.3.3
+      working-directory: Client
+
+    - name: Install dependencies
+      run: npm install
+      working-directory: Client
+
+    - name: Build the project
+      run: npm run build
+      working-directory: Client
+
+    - name: Run Angular tests
+      run: npm run test --watch=false --browsers=ChromeHeadless --single-run
+      working-directory: Client
+
+    - name: Package the application for Windows
+      run: npm run make -- --platform=win32
+      working-directory: Client
+
+    - name: Archive the output
+      run: |
+        New-Item -Path Client/out/make -ItemType Directory -Force
+        Compress-Archive -Path Client/out/make -DestinationPath ${{ github.workspace }}/output.zip
+      shell: pwsh
+
+     - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Description of the release
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ github.workspace }}/output.zip
+          asset_name: output.zip
+          asset_content_type: application/zip
