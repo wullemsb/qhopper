@@ -37,6 +37,7 @@ npm run build-electron
 ## Usage
 ### Connecting to RabbitMQ
 Enter your RabbitMQ server details and click save. Writing the http or https is not required since it adds it automatically.
+>Remark: The hostname should point the Management API plugin URI e.g. localhost:15672
 
 ![login](docs/login.gif)
 
