@@ -1,8 +1,8 @@
 {
-  "name": "client",
-  "description": "desktop application to manage RabbitMQ",
-  "author": "YP",
-  "version": "0.0.0",
+  "name": "QHopper",
+  "description": "Desktop application to manage RabbitMQ",
+  "author": "Young Professionals 2024 @ SopraSteria D&D",
+  "version": "1.0.0",
   "main": "main.js",
   "scripts": {
     "ng": "ng",
