@@ -9,7 +9,7 @@ We welcome contributions from the community! Please follow these guidelines to h
 2.  **Clone the repository**: Clone your forked repository to your local machine.
     
     ```
-    git clone https://github.com/kubatemer/qhopper.git
+    git clone https://github.com/wullemsb/qhopper.git
     ```
     
 4.  **Create a branch**: Always create a new branch before starting work on a new feature or bugfix.
