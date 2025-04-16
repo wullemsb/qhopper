@@ -48,7 +48,7 @@
     "@angular-devkit/build-angular": "^17.3.3",
     "@angular/cli": "^17.3.3",
     "@angular/compiler-cli": "^17.3.0",
-    "@electron-forge/cli": "^7.3.1",
+    "@electron-forge/cli": "^7.8.0",
     "@electron-forge/maker-deb": "^7.3.1",
     "@electron-forge/maker-rpm": "^7.3.1",
     "@electron-forge/maker-squirrel": "^7.3.1",
