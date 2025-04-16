@@ -5,9 +5,10 @@ import { ToastrService } from 'ngx-toastr';
 import { ConnectionModel } from '../../../shared/models/connection.model';
 
 @Component({
-  selector: 'app-delete-connection',
-  templateUrl: 'delete-connection-confirmation-dialog.component.html',
-  styleUrl: 'delete-connection-confirmation-dialog.component.scss'
+    selector: 'app-delete-connection',
+    templateUrl: 'delete-connection-confirmation-dialog.component.html',
+    styleUrl: 'delete-connection-confirmation-dialog.component.scss',
+    standalone: false
 })
 
 export class DeleteConnectionComponent {

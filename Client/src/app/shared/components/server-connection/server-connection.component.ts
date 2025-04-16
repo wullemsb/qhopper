@@ -6,9 +6,10 @@ import { ToastrService } from 'ngx-toastr';
 import { ConnectionService } from '../../services/connection.service';
 
 @Component({
-  selector: 'app-server-connection',
-  templateUrl: './server-connection.component.html',
-  styleUrl: './server-connection.component.scss'
+    selector: 'app-server-connection',
+    templateUrl: './server-connection.component.html',
+    styleUrl: './server-connection.component.scss',
+    standalone: false
 })
 export class ServerConnectionComponent implements OnInit {
   hide: boolean = true;

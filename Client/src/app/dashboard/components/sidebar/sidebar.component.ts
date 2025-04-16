@@ -18,9 +18,10 @@ interface FlatNode {
 }
 
 @Component({
-  selector: 'app-sidebar',
-  templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.scss'
+    selector: 'app-sidebar',
+    templateUrl: './sidebar.component.html',
+    styleUrl: './sidebar.component.scss',
+    standalone: false
 })
 export class SidebarComponent implements OnChanges {
   @Input() vhosts: VhostModel[] = [];

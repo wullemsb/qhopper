@@ -18,9 +18,10 @@ import { DeleteMessagesProgressDialog } from '../delete-messages-progress-dialog
 import { DeleteMessagesConfirmationDialog } from '../delete-messages-confirmation-dialog/delete-messages-confirmation-dialog.component';
 
 @Component({
-  selector: 'app-main',
-  templateUrl: './main.component.html',
-  styleUrl: './main.component.scss'
+    selector: 'app-main',
+    templateUrl: './main.component.html',
+    styleUrl: './main.component.scss',
+    standalone: false
 })
 export class MainComponent {
   vhosts: VhostModel[] = [];

@@ -10,16 +10,17 @@ import { MessageModel } from '../../models/message.model';
 import { QueueModel } from '../../models/queue.model';
 
 @Component({
-  selector: 'app-messages',
-  styleUrl: './messages.component.scss',
-  templateUrl: './messages.component.html',
-  animations: [
-    trigger('detailExpand', [
-      state('collapsed,void', style({ height: '0px', minHeight: '0' })),
-      state('expanded', style({ height: '*' })),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-    ]),
-  ]
+    selector: 'app-messages',
+    styleUrl: './messages.component.scss',
+    templateUrl: './messages.component.html',
+    animations: [
+        trigger('detailExpand', [
+            state('collapsed,void', style({ height: '0px', minHeight: '0' })),
+            state('expanded', style({ height: '*' })),
+            transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+        ]),
+    ],
+    standalone: false
 })
 
 export class MessagesComponent implements OnChanges {

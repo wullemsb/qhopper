@@ -4,9 +4,10 @@ import { MessagePropertiesModel } from '../../models/message-properties.model';
 import { MessageModel } from '../../models/message.model';
 
 @Component({
-  selector: 'app-message-details',
-  templateUrl: './message-details.component.html',
-  styleUrl: './message-details.component.scss'
+    selector: 'app-message-details',
+    templateUrl: './message-details.component.html',
+    styleUrl: './message-details.component.scss',
+    standalone: false
 })
 export class MessageDetailsComponent {
   @Input() message?: MessageModel;

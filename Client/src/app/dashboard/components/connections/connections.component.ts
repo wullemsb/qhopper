@@ -8,9 +8,10 @@ import { ConnectionService } from '../../../shared/services/connection.service';
 import { DeleteConnectionComponent } from '../delete-connection-confirmation-dialog/delete-connection-confirmation-dialog.component';
 
 @Component({
-  selector: 'app-connections',
-  templateUrl: './connections.component.html',
-  styleUrls: ['./connections.component.scss']
+    selector: 'app-connections',
+    templateUrl: './connections.component.html',
+    styleUrls: ['./connections.component.scss'],
+    standalone: false
 })
 export class ConnectionsComponent implements OnInit {
   @Output() selectedConnectionChange = new EventEmitter<ConnectionModel>();
