@@ -1,7 +1,7 @@
 // Modules
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { MatBadgeModule } from '@angular/material/badge';
 import { provideNativeDateAdapter } from '@angular/material/core';
@@ -48,8 +48,7 @@ import { RefreshService } from './services/refresh.service';
 import { DeleteMessagesConfirmationDialog } from './components/delete-messages-confirmation-dialog/delete-messages-confirmation-dialog.component';
 import { DeleteMessagesProgressDialog } from './components/delete-messages-progress-dialog/delete-messages-progress-dialog.component';
 
-@NgModule({
-    declarations: [
+@NgModule({ declarations: [
         SidebarComponent,
         MainComponent,
         ConnectionsComponent,
@@ -64,11 +63,9 @@ import { DeleteMessagesProgressDialog } from './components/delete-messages-progr
         DeleteMessagesConfirmationDialog,
         DeleteMessagesProgressDialog
     ],
-    imports: [
-        CommonModule,
+    schemas: [CUSTOM_ELEMENTS_SCHEMA], imports: [CommonModule,
         DashboardRoutingModule,
         SharedModule,
-        HttpClientModule,
         MatDialogModule,
         MatButtonModule,
         MatProgressSpinnerModule,
@@ -79,9 +76,5 @@ import { DeleteMessagesProgressDialog } from './components/delete-messages-progr
         OwlNativeDateTimeModule,
         OwlMomentDateTimeModule,
         NgxSpinnerModule,
-        MatBadgeModule
-    ],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    providers: [{ provide: OWL_DATE_TIME_FORMATS, useValue: MY_MOMENT_FORMATS }, RabbitApiService, RefreshService, Md5, provideNativeDateAdapter()]
-})
+        MatBadgeModule], providers: [{ provide: OWL_DATE_TIME_FORMATS, useValue: MY_MOMENT_FORMATS }, RabbitApiService, RefreshService, Md5, provideNativeDateAdapter(), provideHttpClient(withInterceptorsFromDi())] })
 export class DashboardModule { }
