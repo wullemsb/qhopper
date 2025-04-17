@@ -26,11 +26,12 @@ export class ConnectionsComponent implements OnInit {
     if (this.connections.length <= 0) {
       this.router.navigate(['/login']);
       this.toastrService.error('There was no connection detected, please reconnect.')
+    }else{
+      this.selectedConnection = this.connections[0];
+      this.onSelectedConnectionChange(this.selectedConnection);
     }
 
-    this.selectedConnection = this.connections[0];
-    this.onSelectedConnectionChange(this.selectedConnection);
-  }
+    }
 
   openConnectionDialog() {
     const dialogRef = this.dialog.open(ServerConnectionComponent);

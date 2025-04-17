@@ -23,103 +23,64 @@ export class ConnectionService {
 
   // Check if there are any connections
   isConnected(): boolean {
-    return !!localStorage.getItem(this.CONNECTIONS_DATA);
+    return this.getAllConnections().length > 0;
   }
 
   // Get all connections
   getAllConnections(): ConnectionModel[] {
-    const connectionNames = this.getConnectionNames();
-    const allConnections: ConnectionModel[] = [];
     const encryptedData = localStorage.getItem(this.CONNECTIONS_DATA);
-
-
     if (encryptedData) {
       const decryptedData = CryptoJS.AES.decrypt(encryptedData, this.ENCRYPTION_KEY).toString(CryptoJS.enc.Utf8);
-      const connections: { [key: string]: ConnectionModel } = JSON.parse(decryptedData) || {};
-
-      for (const name of connectionNames) {
-        const connection = connections[name];
-        if (connection) {
-          allConnections.push(connection);
-        }
+      try {
+        const connections: ConnectionModel[] = JSON.parse(decryptedData) || [];
+        return Array.isArray(connections) ? connections : [];
+      } catch {
+        return [];
       }
     }
-    return allConnections;
-  }
-
-  // Get a connection by its name
-  getConnection(connection: ConnectionModel): ConnectionModel | null {
-    const encryptedData = localStorage.getItem(this.CONNECTIONS_DATA);
-    const keyValue = connection.host + connection.username;
-
-    if (encryptedData) {
-      const decryptedData = CryptoJS.AES.decrypt(encryptedData, this.ENCRYPTION_KEY).toString(CryptoJS.enc.Utf8);
-      const connections: { [key: string]: any } = JSON.parse(decryptedData);
-
-      if (connections && connections[keyValue]) {
-        return connections[keyValue];
-      } else {
-        console.log(`No connection found with key value: '${keyValue}'.`);
-      }
-    }
-
-    return null;
-  }
-
-  // Get all connection names
-  getConnectionNames(): string[] {
-    const encryptedData = localStorage.getItem(this.CONNECTIONS_DATA);
-
-    if (encryptedData) {
-      const decryptedData = CryptoJS.AES.decrypt(encryptedData, this.ENCRYPTION_KEY).toString(CryptoJS.enc.Utf8);
-      const connections = JSON.parse(decryptedData);
-
-      if (connections) {
-        return Object.keys(connections);
-      }
-    }
-
     return [];
   }
 
+  // Get a connection by its host and username
+  getConnection(connection: ConnectionModel): ConnectionModel | null {
+    const connections = this.getAllConnections();
+    return connections.find(
+      (conn) => conn.host === connection.host && conn.username === connection.username
+    ) || null;
+  }
+
+  // Get all connection names (host+username)
+  getConnectionNames(): string[] {
+    const connections = this.getAllConnections();
+    return connections.map(conn => conn.host + conn.username);
+  }
+
   // Add a new connection
-  addConnection(name: string, connection: ConnectionModel): ConnectionModel[] {
-    let connections: { [key: string]: ConnectionModel } = {};
-    const storedData = localStorage.getItem(this.CONNECTIONS_DATA);
-
-    if (storedData) {
-      const decryptedData = CryptoJS.AES.decrypt(storedData, this.ENCRYPTION_KEY).toString(CryptoJS.enc.Utf8);
-      connections = JSON.parse(decryptedData) || {};
-    }
-
-    // Update or add the new connection
-    connections[name] = connection;
-
+  addConnection(_name: string, connection: ConnectionModel): ConnectionModel[] {
+    let connections = this.getAllConnections();
+    // Remove any existing connection with same host+username
+    connections = connections.filter(
+      (conn) => !(conn.host === connection.host && conn.username === connection.username)
+    );
+    // Add new connection
+    connections.push(connection);
     const encryptedData = CryptoJS.AES.encrypt(JSON.stringify(connections), this.ENCRYPTION_KEY).toString();
     localStorage.setItem(this.CONNECTIONS_DATA, encryptedData);
-
-    // Set selection connection
     this.setConnection(connection);
-
-    // Update connections array
-    // Return the updated connections list
-    this.connections = this.getAllConnections();
+    this.connections = connections;
     return this.connections;
   }
 
-  // Delete the connection with the given name
+  // Delete the connection with the given host and username
   deleteConnection(connection: ConnectionModel): ConnectionModel[] {
     let connections = this.getAllConnections();
     connections = connections.filter(
       (conn) =>
         conn.host !== connection.host ||
-        conn.username !== connection.username ||
-        conn.password !== connection.password
+        conn.username !== connection.username
     );
-
     const encryptedData = CryptoJS.AES.encrypt(JSON.stringify(connections), this.ENCRYPTION_KEY).toString();
     localStorage.setItem(this.CONNECTIONS_DATA, encryptedData);
-
     this.connections = connections;
     return this.connections;
   }

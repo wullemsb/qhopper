@@ -1,7 +1,6 @@
 // Modules
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Components
@@ -41,7 +40,6 @@ import { MatTreeModule } from '@angular/material/tree';
     MatInputModule,
     MatButtonModule,
     MatCardModule,
-    FlexLayoutModule,
     MatToolbarModule,
     MatIconModule,
     MatTreeModule,
@@ -68,7 +66,6 @@ import { MatTreeModule } from '@angular/material/tree';
     MatInputModule,
     MatButtonModule,
     MatCardModule,
-    FlexLayoutModule,
     MatToolbarModule,
     MatIconModule,
     MatTreeModule,
