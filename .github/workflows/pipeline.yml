@@ -20,7 +20,7 @@ jobs:
         node-version: '20.x'
 
     - name: Install Angular CLI
-      run: npm install @angular/cli@17.3.3
+      run: npm install @angular/cli@19.2.7
       working-directory: Client
 
     - name: Install dependencies
