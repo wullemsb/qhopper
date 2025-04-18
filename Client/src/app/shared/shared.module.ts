@@ -2,6 +2,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@ngbracket/ngx-layout';
 
 // Components
 import { ServerConnectionComponent } from './components/server-connection/server-connection.component';
@@ -36,6 +37,7 @@ import { MatTreeModule } from '@angular/material/tree';
   declarations: [ServerConnectionComponent],
   imports: [
     CommonModule,
+    FlexLayoutModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
