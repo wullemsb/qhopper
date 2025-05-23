@@ -27,7 +27,7 @@ describe('ConnectionService', () => {
     const connection2: ConnectionModel = { host: 'test2.com', username: 'user2', password: 'pass2' };
     service.addConnection('Test1', connection);
     service.addConnection('Test2', connection2);
-    service.deleteConnection(connection);
+    service.deleteConnectionByName('Test1');
     const connectionsAfter = service.getAllConnections().length;
     expect(connectionsAfter).toEqual(1);
   });

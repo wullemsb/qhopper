@@ -33,8 +33,8 @@ export class ServerConnectionComponent implements OnInit {
   onSubmit() {
     if (this.connectionForm.valid) {
       const formData = this.connectionForm.value;
-      if (this.connectionService.getConnection(formData.host + formData.username) == null) {
-        this.connectionService.addConnection(formData.host + formData.username, formData)
+      if (this.connectionService.getConnectionByName(formData.host) == null) {
+        this.connectionService.addConnection(formData.host, formData)
         this.connectionService.connections = this.connectionService.getAllConnections();
         this.toastr.success('Added connection.')
       } else {

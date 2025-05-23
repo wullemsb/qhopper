@@ -4,7 +4,7 @@
       <mat-icon matTooltip="Current user" aria-hidden="false" aria-label="Person icon" fontIcon="account_circle"
         class="icons"></mat-icon>
       @if (selectedConnection) {
-      <p class="selected-user">{{ selectedConnection.username }}</p>
+      <p class="selected-user">{{ selectedConnection.connection.username }}</p>
       }
     </div>
     <div>
@@ -22,7 +22,7 @@
       [(ngModel)]="selectedConnection" (ngModelChange)="onSelectedConnectionChange($event)">
       @for (connection of connections; track connection) {
       <option [ngValue]="connection">{{
-        connection.host }}</option>
+        connection.connection.host }}</option>
       }
     </select>
     <label for="floatingSelect">Connections</label>

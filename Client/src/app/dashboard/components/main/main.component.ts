@@ -3,7 +3,7 @@ import { Component, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { delay, Subscription, take } from 'rxjs';
-import { ConnectionModel } from '../../../shared/models/connection.model';
+import { ConnectionModel, NamedConnection } from '../../../shared/models/connection.model';
 import { ConnectionService } from '../../../shared/services/connection.service';
 import { MessageModel } from '../../models/message.model';
 import { MessagesActionProgressModel } from '../../models/messages-action-progress.model';
@@ -136,8 +136,8 @@ export class MainComponent {
     });
   }
 
-  onSelectedConnectionChange(selectedConnection: ConnectionModel) {
-    const connection = this.connectionService.getConnection(selectedConnection);
+  onSelectedConnectionChange(selectedConnection: NamedConnection) {
+    const connection = this.connectionService.getConnectionByName(selectedConnection.name);
     if (connection) {
       this.connectionService.setConnection(connection);
       this.rabbitApiService.updateHttpOptions();

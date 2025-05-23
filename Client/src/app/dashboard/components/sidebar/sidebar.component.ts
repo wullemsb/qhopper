@@ -2,7 +2,7 @@ import { FlatTreeControl } from '@angular/cdk/tree';
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { Subscription } from 'rxjs';
-import { ConnectionModel } from '../../../shared/models/connection.model';
+import { ConnectionModel, NamedConnection } from '../../../shared/models/connection.model';
 import { toTreeNodes } from '../../misc/transform-vhosts-to-treenodes';
 import { MessageModel } from '../../models/message.model';
 import { NodeModel } from '../../models/node.model';
@@ -29,7 +29,7 @@ export class SidebarComponent implements OnChanges {
   @Input() incomingQueue!: QueueModel;
   @Output() currentQueueChange = new EventEmitter<QueueModel>();
   @Output() moveMessagesEvent: EventEmitter<QueueModel> = new EventEmitter<QueueModel>();
-  @Output() selectedConnectionChange = new EventEmitter<ConnectionModel>();
+  @Output() selectedConnectionChange = new EventEmitter<NamedConnection>();
   lastActiveNode?: NodeModel;
   activeNode?: NodeModel;
   expandedNodes: Set<string> = new Set<string>();
@@ -39,7 +39,7 @@ export class SidebarComponent implements OnChanges {
   showNoQueuesFoundMessage = false;
   searchTerm = '';
 
-  onSelectedConnectionChange(value: ConnectionModel) {
+  onSelectedConnectionChange(value: NamedConnection) {
     this.selectedConnectionChange.emit(value);
     this.lastActiveNode = this.activeNode;
     this.activeNode = undefined;

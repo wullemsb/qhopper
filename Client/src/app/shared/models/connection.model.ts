@@ -3,3 +3,8 @@ export interface ConnectionModel {
   username: string;
   password: string;
 }
+
+export interface NamedConnection {
+  name: string;
+  connection: ConnectionModel;
+}
