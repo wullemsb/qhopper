@@ -9,7 +9,7 @@ import { StartScreenRoutingModule } from './start-screen-routing.module';
   imports: [
     CommonModule,
     StartScreenRoutingModule,
-    SharedModule,
+    SharedModule
   ],
 })
 export class StartScreenModule { }

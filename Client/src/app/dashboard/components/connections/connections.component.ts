@@ -4,32 +4,35 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ServerConnectionComponent } from '../../../shared/components/server-connection/server-connection.component';
 import { ConnectionModel } from '../../../shared/models/connection.model';
+import { NamedConnection } from '../../../shared/models/connection.model';
 import { ConnectionService } from '../../../shared/services/connection.service';
 import { DeleteConnectionComponent } from '../delete-connection-confirmation-dialog/delete-connection-confirmation-dialog.component';
 
 @Component({
-  selector: 'app-connections',
-  templateUrl: './connections.component.html',
-  styleUrls: ['./connections.component.scss']
+    selector: 'app-connections',
+    templateUrl: './connections.component.html',
+    styleUrls: ['./connections.component.scss'],
+    standalone: false
 })
 export class ConnectionsComponent implements OnInit {
-  @Output() selectedConnectionChange = new EventEmitter<ConnectionModel>();
-  connections: ConnectionModel[] = [];
-  selectedConnection!: ConnectionModel;
+  @Output() selectedConnectionChange = new EventEmitter<NamedConnection>();
+  connections: NamedConnection[] = [];
+  selectedConnection!: NamedConnection;
 
   constructor(private _connectionService: ConnectionService, private toastrService: ToastrService, private router: Router, public dialog: MatDialog,) { }
 
   ngOnInit(): void {
-    this.connections = this._connectionService.connections;
+    this.connections = this._connectionService.getAllConnections();
 
     if (this.connections.length <= 0) {
       this.router.navigate(['/login']);
       this.toastrService.error('There was no connection detected, please reconnect.')
+    }else{
+      this.selectedConnection = this.connections[0];
+      this.onSelectedConnectionChange(this.selectedConnection);
     }
 
-    this.selectedConnection = this.connections[0];
-    this.onSelectedConnectionChange(this.selectedConnection);
-  }
+    }
 
   openConnectionDialog() {
     const dialogRef = this.dialog.open(ServerConnectionComponent);
@@ -49,7 +52,7 @@ export class ConnectionsComponent implements OnInit {
     });
   }
 
-  onSelectedConnectionChange(value: ConnectionModel): void {
+  onSelectedConnectionChange(value: NamedConnection): void {
     this.selectedConnectionChange.emit(value);
   }
 

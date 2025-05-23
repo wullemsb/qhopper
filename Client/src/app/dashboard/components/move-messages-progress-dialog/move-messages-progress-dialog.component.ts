@@ -11,9 +11,10 @@ import { MessagesActionStatus } from '../../models/messages-action-status.enum';
 
 
 @Component({
-  selector: 'move-messages-progress-dialog',
-  templateUrl: 'move-messages-progress-dialog.component.html',
-  styleUrl: 'move-messages-progress-dialog.component.scss'
+    selector: 'move-messages-progress-dialog',
+    templateUrl: 'move-messages-progress-dialog.component.html',
+    styleUrl: 'move-messages-progress-dialog.component.scss',
+    standalone: false
 })
 export class MoveMessagesProgressDialog {
   messageStatus!: MessagesActionProgressModel;

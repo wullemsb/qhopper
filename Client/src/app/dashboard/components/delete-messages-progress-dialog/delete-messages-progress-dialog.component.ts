@@ -10,9 +10,10 @@ import { MessagesActionStatus } from '../../models/messages-action-status.enum';
 
 
 @Component({
-  selector: 'delete-messages-progress-dialog',
-  templateUrl: 'delete-messages-progress-dialog.component.html',
-  styleUrl: 'delete-messages-progress-dialog.component.scss'
+    selector: 'delete-messages-progress-dialog',
+    templateUrl: 'delete-messages-progress-dialog.component.html',
+    styleUrl: 'delete-messages-progress-dialog.component.scss',
+    standalone: false
 })
 export class DeleteMessagesProgressDialog {
   messageStatus!: MessagesActionProgressModel;

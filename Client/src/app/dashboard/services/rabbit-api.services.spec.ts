@@ -1,10 +1,11 @@
 import { TestBed } from "@angular/core/testing";
-import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
+import { HttpTestingController, provideHttpClientTesting } from "@angular/common/http/testing";
 import { RabbitApiService } from "./rabbit-api.service";
 import { RefreshService } from "./refresh.service";
 import { ConnectionService } from "../../shared/services/connection.service";
 import { ConnectionModel } from "../../shared/models/connection.model";
 import { Md5 } from "ts-md5";
+import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 
 describe('RabbitApiService', () => {
   let service: RabbitApiService;
@@ -12,9 +13,9 @@ describe('RabbitApiService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [RabbitApiService, RefreshService, ConnectionService, Md5]
-    });
+    imports: [],
+    providers: [RabbitApiService, RefreshService, ConnectionService, Md5, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     service = TestBed.inject(RabbitApiService);
     httpTestingController = TestBed.inject(HttpTestingController);
   });

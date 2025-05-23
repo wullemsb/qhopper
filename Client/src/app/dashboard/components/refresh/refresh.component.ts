@@ -5,9 +5,10 @@ import { RefreshRate } from '../../models/refresh-rate.enum';
 import { RefreshService } from '../../services/refresh.service';
 
 @Component({
-  selector: 'app-refresh',
-  templateUrl: './refresh.component.html',
-  styleUrl: './refresh.component.scss'
+    selector: 'app-refresh',
+    templateUrl: './refresh.component.html',
+    styleUrl: './refresh.component.scss',
+    standalone: false
 })
 export class RefreshComponent {
   public selectedRefreshRateOption: RefreshRate = this.refreshService.getRefreshRateInMilliseconds();

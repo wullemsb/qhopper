@@ -20,7 +20,7 @@ describe('ServerConnectionComponent', () => {
   let dialog: jasmine.SpyObj<any>;
 
   beforeEach(async () => {
-    const connectionServiceSpy = jasmine.createSpyObj('ConnectionService', ['addConnection', 'getAllConnections', 'getConnection']);
+    const connectionServiceSpy = jasmine.createSpyObj('ConnectionService', ['addConnection', 'getAllConnections', 'getConnectionByName']);
     const toastrServiceSpy = jasmine.createSpyObj('ToastrService', ['success', 'error']);
     const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
     const dialogSpy = jasmine.createSpyObj('MatDialog', ['closeAll']);
@@ -76,12 +76,12 @@ describe('ServerConnectionComponent', () => {
       username: 'testUsername',
       password: 'testPassword'
     };
-    connectionService.getConnection.and.returnValue(null);
+    connectionService.getConnectionByName.and.returnValue(null);
     connectionService.getAllConnections.and.returnValue([]);
     component.connectionForm.setValue(formData);
     component.onSubmit();
-    expect(connectionService.getConnection).toHaveBeenCalledWith('testHosttestUsername');
-    expect(connectionService.addConnection).toHaveBeenCalledWith('testHosttestUsername', formData);
+    expect(connectionService.getConnectionByName).toHaveBeenCalledWith('testHost');
+    expect(connectionService.addConnection).toHaveBeenCalledWith('testHost', formData);
     expect(connectionService.getAllConnections).toHaveBeenCalled();
     expect(toastrService.success).toHaveBeenCalledWith('Added connection.');
     expect(dialog.closeAll).toHaveBeenCalled();
